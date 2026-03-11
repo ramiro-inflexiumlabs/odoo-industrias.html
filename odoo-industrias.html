@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odoo — Soluciones por Industria</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --odoo-purple: #714B67;
+    --odoo-pink: #E47F7F;
+    --odoo-red: #D9534F;
+    --odoo-green: #28A745;
+    --odoo-blue: #017E84;
+    --odoo-yellow: #F0AD4E;
+    --odoo-dark: #1C1B22;
+    --odoo-gray: #F8F8F8;
+    --odoo-text: #3D3D3D;
+    --odoo-light: #FFFFFF;
+    --odoo-border: #E4E4E4;
+    --transition: 0.28s cubic-bezier(.4,0,.2,1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--odoo-text);
+    background: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--odoo-border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 22px;
+    color: var(--odoo-purple);
+    text-decoration: none;
+  }
+
+  .nav-logo svg { width: 32px; height: 32px; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px; font-weight: 600;
+    color: var(--odoo-text); text-decoration: none;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--odoo-purple); }
+
+  .nav-cta {
+    background: var(--odoo-purple);
+    color: #fff !important;
+    padding: 9px 22px;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    transition: background var(--transition) !important;
+  }
+  .nav-cta:hover { background: #5a3a52 !important; color: #fff !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding-top: 64px;
+    min-height: 560px;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, #714B67 0%, #4A2B3F 50%, #1C1B22 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 80px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 13px; font-weight: 600;
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero-badge span { width: 8px; height: 8px; background: #6BCB77; border-radius: 50%; display: inline-block; }
+
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900; line-height: 1.15;
+    color: #fff; margin-bottom: 20px;
+  }
+
+  .hero h1 em { color: #E47F7F; font-style: normal; }
+
+  .hero p {
+    font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.8);
+    margin-bottom: 36px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: #E47F7F; color: #fff;
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 700; font-size: 15px;
+    text-decoration: none;
+    transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #cf6a6a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(228,127,127,0.4); }
+
+  .btn-outline {
+    background: transparent; color: #fff;
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 700; font-size: 15px;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.35);
+    transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+  .hero-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px; padding: 20px;
+    backdrop-filter: blur(8px);
+    transition: transform var(--transition);
+    cursor: default;
+  }
+  .hero-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.14); }
+
+  .hero-card:first-child { grid-column: span 2; }
+
+  .hero-card-icon { font-size: 28px; margin-bottom: 10px; }
+  .hero-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .hero-card p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* ─── INDUSTRIAS NAV ─── */
+  .industries-nav {
+    background: #fff;
+    border-bottom: 2px solid var(--odoo-border);
+    position: sticky; top: 64px; z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .industries-nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .industries-nav-inner::-webkit-scrollbar { display: none; }
+
+  .ind-tab {
+    flex-shrink: 0;
+    padding: 18px 24px;
+    font-size: 13px; font-weight: 700;
+    color: #888; text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all var(--transition);
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
+    font-family: inherit;
+  }
+  .ind-tab:hover { color: var(--odoo-purple); background: rgba(113,75,103,0.04); }
+  .ind-tab.active { color: var(--odoo-purple); border-bottom-color: var(--odoo-purple); }
+  .ind-tab .tab-icon { font-size: 18px; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 96px 0; }
+  .section:nth-child(even) { background: var(--odoo-gray); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+  .section-header { text-align: center; margin-bottom: 64px; }
+
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--odoo-purple);
+    margin-bottom: 14px;
+  }
+
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: ''; display: block; width: 24px; height: 2px; background: var(--odoo-purple);
+  }
+
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(28px, 3vw, 42px); font-weight: 900;
+    color: var(--odoo-dark); margin-bottom: 16px; line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 17px; color: #666; max-width: 580px; margin: 0 auto; line-height: 1.7;
+  }
+
+  /* ─── INDUSTRY SECTION ─── */
+  .industry-section {
+    padding: 96px 0;
+    scroll-margin-top: 128px;
+  }
+
+  .industry-header {
+    display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;
+    margin-bottom: 56px; padding-bottom: 40px;
+    border-bottom: 2px solid var(--odoo-border);
+  }
+
+  .industry-icon-wrap {
+    width: 88px; height: 88px; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; flex-shrink: 0;
+  }
+
+  .industry-meta { }
+  .industry-meta .eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 8px; opacity: 0.6;
+  }
+  .industry-meta h2 {
+    font-family: 'Nunito', sans-serif; font-weight: 900;
+    font-size: clamp(26px, 3vw, 38px); color: var(--odoo-dark);
+    margin-bottom: 12px; line-height: 1.2;
+  }
+  .industry-meta p {
+    font-size: 16px; color: #666; line-height: 1.7; max-width: 640px;
+  }
+
+  /* ─── MODULES GRID ─── */
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px;
+  }
+
+  .module-card {
+    background: #fff; border: 1px solid var(--odoo-border);
+    border-radius: 12px; padding: 24px;
+    transition: all var(--transition);
+    position: relative; overflow: hidden;
+  }
+
+  .section:nth-child(even) .module-card { background: #fff; }
+
+  .module-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .module-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); border-color: transparent; }
+  .module-card:hover::before { opacity: 1; }
+
+  .module-icon { font-size: 32px; margin-bottom: 14px; }
+  .module-card h4 { font-size: 15px; font-weight: 800; color: var(--odoo-dark); margin-bottom: 8px; }
+  .module-card p { font-size: 13px; color: #777; line-height: 1.6; }
+
+  .module-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+  }
+
+  .tag {
+    font-size: 11px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; letter-spacing: 0.04em;
+  }
+
+  /* ─── CASE STUDY STRIP ─── */
+  .case-strip {
+    background: var(--odoo-dark);
+    border-radius: 16px; padding: 36px 40px;
+    display: flex; align-items: center; gap: 32px;
+    margin-top: 16px;
+  }
+
+  .case-strip-quote { font-size: 48px; color: var(--odoo-purple); line-height: 1; margin-right: -8px; }
+
+  .case-strip-text h4 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .case-strip-text p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .case-strip-text cite { font-style: normal; font-size: 13px; color: #E47F7F; font-weight: 600; }
+
+  .case-strip-stat {
+    flex-shrink: 0; text-align: center;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 20px 28px;
+  }
+  .case-strip-stat .stat-num {
+    font-family: 'Nunito', sans-serif; font-size: 36px; font-weight: 900; color: #6BCB77;
+  }
+  .case-strip-stat .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  /* ─── STATS BAND ─── */
+  .stats-band {
+    background: var(--odoo-purple);
+    padding: 60px 0;
+  }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+
+  .stat-item {
+    text-align: center; padding: 32px 24px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-item:last-child { border: none; }
+  .stat-item .num {
+    font-family: 'Nunito', sans-serif; font-size: 48px; font-weight: 900;
+    color: #fff; line-height: 1; margin-bottom: 8px;
+  }
+  .stat-item .label { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 600; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    padding: 96px 0;
+    background: linear-gradient(135deg, #f9f4f7 0%, #fff 100%);
+    text-align: center;
+  }
+
+  .cta-inner { max-width: 680px; margin: 0 auto; }
+
+  .cta-inner h2 {
+    font-family: 'Nunito', sans-serif; font-size: 40px; font-weight: 900;
+    color: var(--odoo-dark); margin-bottom: 16px; line-height: 1.2;
+  }
+
+  .cta-inner p { font-size: 17px; color: #666; margin-bottom: 40px; line-height: 1.7; }
+
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-purple {
+    background: var(--odoo-purple); color: #fff;
+    padding: 16px 36px; border-radius: 8px;
+    font-weight: 800; font-size: 15px;
+    text-decoration: none;
+    transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-purple:hover { background: #5a3a52; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(113,75,103,0.35); }
+
+  .btn-ghost {
+    background: transparent; color: var(--odoo-purple);
+    padding: 16px 36px; border-radius: 8px;
+    font-weight: 800; font-size: 15px;
+    text-decoration: none;
+    border: 2px solid var(--odoo-purple);
+    transition: all var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost:hover { background: var(--odoo-purple); color: #fff; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--odoo-dark);
+    padding: 48px 0; text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  /* ─── COLOR THEMES PER INDUSTRY ─── */
+  .theme-hotel { --ind-color: #017E84; --ind-light: #E0F5F6; }
+  .theme-gobierno { --ind-color: #4A6FA5; --ind-light: #E8EEF7; }
+  .theme-retail { --ind-color: #E47F7F; --ind-light: #FDF0F0; }
+  .theme-barraca { --ind-color: #D4813A; --ind-light: #FEF3E8; }
+  .theme-construccion { --ind-color: #7B7B4B; --ind-light: #F5F5E8; }
+  .theme-logistica { --ind-color: #5B4AA5; --ind-light: #EEE8F7; }
+
+  .industry-icon-wrap { background: var(--ind-light); color: var(--ind-color); }
+  .industry-meta .eyebrow { color: var(--ind-color); }
+
+  .module-card::before { background: var(--ind-color); }
+  .module-card:hover { border-color: var(--ind-color); }
+
+  .tag { background: var(--ind-light); color: var(--ind-color); }
+
+  /* Alternating background for sections */
+  .industry-section:nth-child(odd) { background: #fff; }
+  .industry-section:nth-child(even) { background: var(--odoo-gray); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate {
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(.4,0,.2,1) forwards;
+  }
+
+  /* Stagger delays */
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
+    .hero-visual { display: none; }
+    .container { padding: 0 20px; }
+    .modules-grid { grid-template-columns: 1fr; }
+    .industry-header { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .case-strip { flex-direction: column; gap: 20px; }
+    .industries-nav-inner { padding: 0 8px; }
+    .ind-tab { padding: 14px 16px; }
+  }
+
+  @media (max-width: 1024px) {
+    .modules-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="8" fill="#714B67"/>
+      <path d="M8 16C8 11.582 11.582 8 16 8C20.418 8 24 11.582 24 16C24 20.418 20.418 24 16 24C11.582 24 8 20.418 8 16Z" fill="white" fill-opacity="0.3"/>
+      <path d="M13 16C13 14.343 14.343 13 16 13C17.657 13 19 14.343 19 16C19 17.657 17.657 19 16 19C14.343 19 13 17.657 13 16Z" fill="white"/>
+    </svg>
+    odoo
+  </a>
+  <ul class="nav-links">
+    <li><a href="#industrias">Industrias</a></li>
+    <li><a href="#hoteles">Hoteles</a></li>
+    <li><a href="#retail">Retail</a></li>
+    <li><a href="#construccion">Construcción</a></li>
+    <li><a href="#" class="nav-cta">Probar gratis</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge animate"><span></span> Más de 7 millones de usuarios</div>
+      <h1 class="animate delay-1">Una plataforma para <em>cada industria</em></h1>
+      <p class="animate delay-2">Odoo adapta sus más de 80 aplicaciones integradas a las necesidades específicas de cada sector. Desde hoteles hasta logística, transformamos la gestión de tu negocio.</p>
+      <div class="hero-actions animate delay-3">
+        <a href="#industrias" class="btn-primary">Explorar industrias →</a>
+        <a href="#" class="btn-outline">Ver demo</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card animate delay-2">
+        <div class="hero-card-icon">📊</div>
+        <h4>Todo integrado, sin fricciones</h4>
+        <p>Ventas, inventario, contabilidad, RRHH y más conectados en una sola plataforma modular.</p>
+      </div>
+      <div class="hero-card animate delay-3">
+        <div class="hero-card-icon">🏨</div>
+        <h4>6 industrias</h4>
+        <p>Soluciones verticales listas para usar</p>
+      </div>
+      <div class="hero-card animate delay-4">
+        <div class="hero-card-icon">⚡</div>
+        <h4>Implementación rápida</h4>
+        <p>Operativo en días, no meses</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIAS NAV -->
+<nav class="industries-nav" id="industrias">
+  <div class="industries-nav-inner">
+    <button class="ind-tab active" onclick="scrollTo('hoteles')"><span class="tab-icon">🏨</span> Hoteles</button>
+    <button class="ind-tab" onclick="scrollTo('gobierno')"><span class="tab-icon">🏛️</span> Gobiernos</button>
+    <button class="ind-tab" onclick="scrollTo('retail')"><span class="tab-icon">🛒</span> Retail</button>
+    <button class="ind-tab" onclick="scrollTo('barraca')"><span class="tab-icon">🪵</span> Barracas</button>
+    <button class="ind-tab" onclick="scrollTo('construccion')"><span class="tab-icon">🏗️</span> Construcción</button>
+    <button class="ind-tab" onclick="scrollTo('logistica')"><span class="tab-icon">🚚</span> Logística</button>
+  </div>
+</nav>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="num">80+</div><div class="label">Aplicaciones integradas</div></div>
+      <div class="stat-item"><div class="num">7M+</div><div class="label">Usuarios en el mundo</div></div>
+      <div class="stat-item"><div class="num">150+</div><div class="label">Países</div></div>
+      <div class="stat-item"><div class="num">6</div><div class="label">Industrias verticales</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOTELES ═══ -->
+<section class="industry-section theme-hotel" id="hoteles">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🏨</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Industria Hotelera</div>
+        <h2>Hoteles & Hospitalidad</h2>
+        <p>Gestión completa del ciclo hotelero: desde reservas y check-in hasta housekeeping y análisis de ocupación. Odoo centraliza la experiencia del huésped y la operación interna en una sola plataforma.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">🛏️</div>
+        <h4>Property Management System</h4>
+        <p>Gestión de habitaciones, reservas, tarifas dinámicas y calendarios de disponibilidad en tiempo real.</p>
+        <div class="module-tags">
+          <span class="tag">Reservas</span>
+          <span class="tag">Check-in/out</span>
+          <span class="tag">Tarifas</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🍽️</div>
+        <h4>Punto de Venta & Restaurante</h4>
+        <p>POS integrado para restaurante, room service y bar. Facturación directa a la habitación del huésped.</p>
+        <div class="module-tags">
+          <span class="tag">POS</span>
+          <span class="tag">Room service</span>
+          <span class="tag">Menú digital</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🧹</div>
+        <h4>Housekeeping</h4>
+        <p>Asignación automática de tareas de limpieza, seguimiento de estado de habitaciones e incidencias.</p>
+        <div class="module-tags">
+          <span class="tag">Tareas</span>
+          <span class="tag">Mantenimiento</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📊</div>
+        <h4>Revenue Management</h4>
+        <p>Dashboard de ocupación, ADR, RevPAR y análisis de rentabilidad por temporada y tipo de habitación.</p>
+        <div class="module-tags">
+          <span class="tag">KPIs</span>
+          <span class="tag">RevPAR</span>
+          <span class="tag">Reportes</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">💳</div>
+        <h4>Facturación Integrada</h4>
+        <p>Facturación de todos los servicios consumidos (spa, restaurante, extras) en un único checkout.</p>
+        <div class="module-tags">
+          <span class="tag">Factura única</span>
+          <span class="tag">Pagos</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🌐</div>
+        <h4>Canal de Reservas Online</h4>
+        <p>Sitio web propio con motor de reservas, integración con OTAs y gestión de canales centralizada.</p>
+        <div class="module-tags">
+          <span class="tag">Website</span>
+          <span class="tag">OTA sync</span>
+          <span class="tag">CRM</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>Hotel Playa Grande — Punta del Este</h4>
+        <p>Con Odoo unificamos reservas, restaurante y facturación. El check-out que antes tardaba 15 minutos ahora demora menos de 2.</p>
+        <cite>— Gerente de Operaciones</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">87%</div>
+        <div class="stat-label">reducción en<br>tiempo de checkout</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">+23%</div>
+        <div class="stat-label">ingresos por<br>upselling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GOBIERNO ═══ -->
+<section class="industry-section theme-gobierno" id="gobierno">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🏛️</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Sector Público</div>
+        <h2>Gobiernos & Municipios</h2>
+        <p>Modernización de la gestión pública con herramientas de transparencia, eficiencia administrativa y atención ciudadana. Odoo permite a los organismos públicos digitalizar sus procesos con trazabilidad total.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">📋</div>
+        <h4>Gestión de Trámites</h4>
+        <p>Digitlización de expedientes, habilitaciones y trámites ciudadanos con seguimiento en tiempo real.</p>
+        <div class="module-tags">
+          <span class="tag">Expedientes</span>
+          <span class="tag">Workflow</span>
+          <span class="tag">Ciudadanos</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">💰</div>
+        <h4>Presupuesto & Tesorería</h4>
+        <p>Control presupuestario por partida, aprobaciones multinivel y rendición de cuentas transparente.</p>
+        <div class="module-tags">
+          <span class="tag">Presupuesto</span>
+          <span class="tag">Licitaciones</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">👥</div>
+        <h4>Recursos Humanos Públicos</h4>
+        <p>Gestión de planta permanente y contratados, liquidación de haberes y evaluaciones de desempeño.</p>
+        <div class="module-tags">
+          <span class="tag">Nómina</span>
+          <span class="tag">Legajos</span>
+          <span class="tag">Licencias</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🔍</div>
+        <h4>Transparencia & Auditoría</h4>
+        <p>Portal público de compras, registros de contrataciones y logs de auditoría inmodificables.</p>
+        <div class="module-tags">
+          <span class="tag">Auditoría</span>
+          <span class="tag">Compras públicas</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🏘️</div>
+        <h4>Gestión Patrimonial</h4>
+        <p>Inventario de activos públicos, mantenimiento de infraestructura y gestión de flotas municipales.</p>
+        <div class="module-tags">
+          <span class="tag">Activos</span>
+          <span class="tag">Flotas</span>
+          <span class="tag">Mantenimiento</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📱</div>
+        <h4>Portal Ciudadano</h4>
+        <p>Autogestión de trámites, consulta de expedientes y pagos de tasas online para los ciudadanos.</p>
+        <div class="module-tags">
+          <span class="tag">Portal web</span>
+          <span class="tag">Tasas</span>
+          <span class="tag">Consultas</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>Municipio de Canelones — Uruguay</h4>
+        <p>Implementamos Odoo para gestionar más de 40.000 trámites anuales. Los ciudadanos ahora hacen seguimiento online y redujimos la presencia física un 60%.</p>
+        <cite>— Secretaría General Municipal</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">60%</div>
+        <div class="stat-label">menos trámites<br>presenciales</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">4x</div>
+        <div class="stat-label">más rápido el<br>procesamiento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RETAIL ═══ -->
+<section class="industry-section theme-retail" id="retail">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🛒</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Comercio Minorista</div>
+        <h2>Retail & Comercio</h2>
+        <p>Gestión omnicanal que unifica tienda física, e-commerce y marketplace. Desde el punto de venta hasta la cadena de abastecimiento, con visibilidad completa del negocio en tiempo real.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">🖥️</div>
+        <h4>Punto de Venta (POS)</h4>
+        <p>POS táctil con modo offline, gestión de cajas, descuentos, devoluciones y fidelización de clientes.</p>
+        <div class="module-tags">
+          <span class="tag">POS</span>
+          <span class="tag">Caja</span>
+          <span class="tag">Fidelidad</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📦</div>
+        <h4>Inventario & Stock</h4>
+        <p>Control de stock multi-depósito con reposición automática, gestión de lotes y trazabilidad de productos.</p>
+        <div class="module-tags">
+          <span class="tag">Multi-depósito</span>
+          <span class="tag">Reposición</span>
+          <span class="tag">Lotes</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🌐</div>
+        <h4>E-commerce Integrado</h4>
+        <p>Tienda online nativa conectada con el inventario. Sin sincronización manual, stock siempre actualizado.</p>
+        <div class="module-tags">
+          <span class="tag">Tienda online</span>
+          <span class="tag">SEO</span>
+          <span class="tag">Pagos</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🤝</div>
+        <h4>CRM & Fidelización</h4>
+        <p>Historial completo del cliente, programas de puntos, campañas de email marketing y segmentación.</p>
+        <div class="module-tags">
+          <span class="tag">CRM</span>
+          <span class="tag">Puntos</span>
+          <span class="tag">Email</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📈</div>
+        <h4>Business Intelligence</h4>
+        <p>Reportes de ventas por producto, empleado, canal y período. Márgenes, rotación y análisis ABC.</p>
+        <div class="module-tags">
+          <span class="tag">Dashboards</span>
+          <span class="tag">Márgenes</span>
+          <span class="tag">ABC</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🚚</div>
+        <h4>Compras & Proveedores</h4>
+        <p>Órdenes de compra automatizadas según stock mínimo, comparación de proveedores y seguimiento de entrega.</p>
+        <div class="module-tags">
+          <span class="tag">Compras</span>
+          <span class="tag">Proveedores</span>
+          <span class="tag">Lead time</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>Cadena Textil — 12 sucursales</h4>
+        <p>Unificamos nuestro POS, e-commerce y depósito central en Odoo. Eliminamos las roturas de stock y aumentamos las ventas cruzadas un 34%.</p>
+        <cite>— Director Comercial</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">0%</div>
+        <div class="stat-label">roturas de<br>stock crítico</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">+34%</div>
+        <div class="stat-label">ventas<br>cruzadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BARRACA ═══ -->
+<section class="industry-section theme-barraca" id="barraca">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🪵</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Materiales de Construcción</div>
+        <h2>Barracas & Materiales</h2>
+        <p>Solución integral para comercializadoras de materiales de construcción, madera, hierro y afines. Control de inventario complejo, crédito a constructoras y gestión de entregas en obra.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">🏗️</div>
+        <h4>Inventario por Variantes</h4>
+        <p>Gestión de productos por medida, calibre y calidad. Control de stock de madera, hierro, cemento con unidades específicas (m², m³, kg, rollos).</p>
+        <div class="module-tags">
+          <span class="tag">Variantes</span>
+          <span class="tag">Lotes</span>
+          <span class="tag">M² / m³</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">💼</div>
+        <h4>Crédito a Constructoras</h4>
+        <p>Cuentas corrientes por cliente con límites de crédito, vencimientos y alertas automáticas de deuda.</p>
+        <div class="module-tags">
+          <span class="tag">Cta. corriente</span>
+          <span class="tag">Límites</span>
+          <span class="tag">Cobranza</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🚛</div>
+        <h4>Entregas en Obra</h4>
+        <p>Programación de remitos por obra y cliente. Hoja de ruta del camión con confirmación de entrega desde móvil.</p>
+        <div class="module-tags">
+          <span class="tag">Remitos</span>
+          <span class="tag">Rutas</span>
+          <span class="tag">Confirmación</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📐</div>
+        <h4>Presupuestos de Obra</h4>
+        <p>Cotizaciones por proyecto con desglose de materiales, actualizaciones de precio automáticas y aprobación del cliente.</p>
+        <div class="module-tags">
+          <span class="tag">Cotizaciones</span>
+          <span class="tag">Proyectos</span>
+          <span class="tag">Actualizaciones</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🔄</div>
+        <h4>Gestión de Devoluciones</h4>
+        <p>Control de material sobrante de obra devuelto al depósito, notas de crédito y reingreso al stock.</p>
+        <div class="module-tags">
+          <span class="tag">Devoluciones</span>
+          <span class="tag">N/C</span>
+          <span class="tag">Depósito</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📊</div>
+        <h4>Análisis de Márgenes</h4>
+        <p>Rentabilidad por producto, proveedor y cliente. Identificación de materiales más rentables y clientes clave.</p>
+        <div class="module-tags">
+          <span class="tag">Márgenes</span>
+          <span class="tag">Ranking</span>
+          <span class="tag">Proveedores</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>Barraca del Norte — Montevideo</h4>
+        <p>Teníamos el inventario en planillas y los créditos en papel. Odoo nos dio visibilidad total: sabemos exactamente cuánto le debemos a cada proveedor y cuánto nos deben nuestros clientes.</p>
+        <cite>— Dueño y Gerente General</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">95%</div>
+        <div class="stat-label">exactitud<br>de inventario</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">-40%</div>
+        <div class="stat-label">deudas<br>incobrables</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONSTRUCCIÓN ═══ -->
+<section class="industry-section theme-construccion" id="construccion">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🏗️</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Industria de la Construcción</div>
+        <h2>Construcción & Proyectos</h2>
+        <p>Gestión de obras desde el presupuesto inicial hasta la entrega final. Control de costos, avance de obra, subcontratistas, materiales en sitio y rentabilidad de cada proyecto.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">📋</div>
+        <h4>Gestión de Proyectos</h4>
+        <p>Planificación con diagrama de Gantt, tareas por etapa, asignación de equipos y seguimiento de avance.</p>
+        <div class="module-tags">
+          <span class="tag">Gantt</span>
+          <span class="tag">Tareas</span>
+          <span class="tag">Hitos</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">💰</div>
+        <h4>Control de Costos</h4>
+        <p>Presupuesto vs. ejecución real por partida de obra. Alertas de desvío y reprevisión automática.</p>
+        <div class="module-tags">
+          <span class="tag">Budget</span>
+          <span class="tag">Desvíos</span>
+          <span class="tag">Certificaciones</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">👷</div>
+        <h4>Gestión de Cuadrillas</h4>
+        <p>Partes de obra diarios, control de asistencia en campo, horas por partida y costo de mano de obra.</p>
+        <div class="module-tags">
+          <span class="tag">Partes</span>
+          <span class="tag">Asistencia</span>
+          <span class="tag">RRHH</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🔧</div>
+        <h4>Equipos & Maquinaria</h4>
+        <p>Control de uso, mantenimiento preventivo y costo por hora de maquinaria propia y alquilada.</p>
+        <div class="module-tags">
+          <span class="tag">Maquinaria</span>
+          <span class="tag">Mantenimiento</span>
+          <span class="tag">Horas</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📦</div>
+        <h4>Materiales & Acopio</h4>
+        <p>Control de materiales en obra y depósito central. Pedidos de materiales aprobados por jefe de obra.</p>
+        <div class="module-tags">
+          <span class="tag">Acopio</span>
+          <span class="tag">Pedidos</span>
+          <span class="tag">Depósito</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🤝</div>
+        <h4>Subcontratistas</h4>
+        <p>Contratos de subcontratación, medición de avance, aprobación de certificados y pagos parciales.</p>
+        <div class="module-tags">
+          <span class="tag">Contratos</span>
+          <span class="tag">Certificados</span>
+          <span class="tag">Pagos</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>Constructora Horizonte — 8 obras simultáneas</h4>
+        <p>Antes no sabíamos si una obra era rentable hasta que terminaba. Con Odoo vemos el margen en tiempo real y actuamos antes de que sea tarde.</p>
+        <cite>— Director de Operaciones</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">+18%</div>
+        <div class="stat-label">margen neto<br>promedio</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">-30%</div>
+        <div class="stat-label">sobrecostos<br>de obra</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LOGÍSTICA ═══ -->
+<section class="industry-section theme-logistica" id="logistica">
+  <div class="container">
+    <div class="industry-header">
+      <div class="industry-icon-wrap">🚚</div>
+      <div class="industry-meta">
+        <div class="eyebrow">Supply Chain & Distribución</div>
+        <h2>Logística & Transporte</h2>
+        <p>Plataforma end-to-end para operadores logísticos, transportistas y distribuidores. Desde la recepción de mercadería hasta la entrega final, con trazabilidad completa y optimización de rutas.</p>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">🏭</div>
+        <h4>Gestión de Almacén (WMS)</h4>
+        <p>Recepciones, picking, packing y despacho optimizados. Ubicaciones, zonas y estrategias de almacenaje configurables.</p>
+        <div class="module-tags">
+          <span class="tag">WMS</span>
+          <span class="tag">Picking</span>
+          <span class="tag">Ubicaciones</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🗺️</div>
+        <h4>Planificación de Rutas</h4>
+        <p>Armado de rutas de entrega, optimización por capacidad y zona geográfica, hoja de ruta del conductor.</p>
+        <div class="module-tags">
+          <span class="tag">Rutas</span>
+          <span class="tag">Optimización</span>
+          <span class="tag">Conductores</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📍</div>
+        <h4>Tracking en Tiempo Real</h4>
+        <p>Seguimiento de vehículos, confirmación de entrega con firma digital y notificaciones al destinatario.</p>
+        <div class="module-tags">
+          <span class="tag">GPS</span>
+          <span class="tag">Firma digital</span>
+          <span class="tag">Notificaciones</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📄</div>
+        <h4>Documentación Aduanera</h4>
+        <p>Generación de MICs, CMRs, DUAs y documentación de importación/exportación integrada al flujo logístico.</p>
+        <div class="module-tags">
+          <span class="tag">MIC/CMR</span>
+          <span class="tag">Aduana</span>
+          <span class="tag">DUA</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🚛</div>
+        <h4>Gestión de Flota</h4>
+        <p>Control de vehículos, mantenimiento preventivo, consumo de combustible y costos operativos por unidad.</p>
+        <div class="module-tags">
+          <span class="tag">Flota</span>
+          <span class="tag">Mantenimiento</span>
+          <span class="tag">Combustible</span>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">📊</div>
+        <h4>KPIs & Performance</h4>
+        <p>OTIF, costo por entrega, ocupación de flota, incidencias y satisfacción del cliente en dashboards ejecutivos.</p>
+        <div class="module-tags">
+          <span class="tag">OTIF</span>
+          <span class="tag">Costo/entrega</span>
+          <span class="tag">SLA</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-strip">
+      <div class="case-strip-quote">"</div>
+      <div class="case-strip-text" style="flex:1">
+        <h4>LogiSur — Distribución Regional</h4>
+        <p>Con Odoo optimizamos las rutas y redujimos los kilómetros recorridos un 22% sin bajar el nivel de servicio. El OTIF subió de 84% a 97% en 6 meses.</p>
+        <cite>— Jefe de Operaciones Logísticas</cite>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">97%</div>
+        <div class="stat-label">OTIF<br>(antes 84%)</div>
+      </div>
+      <div class="case-strip-stat">
+        <div class="stat-num">-22%</div>
+        <div class="stat-label">km recorridos<br>por entrega</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>¿Listo para transformar tu industria?</h2>
+      <p>Únete a más de 7 millones de usuarios que ya gestionan su negocio con Odoo. Empieza gratis hoy, sin tarjeta de crédito.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn-purple">Comenzar gratis →</a>
+        <a href="#" class="btn-ghost">Hablar con un experto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p><strong>odoo</strong> &nbsp;·&nbsp; La plataforma empresarial más completa del mundo &nbsp;·&nbsp; © 2024 Odoo S.A.</p>
+    <p style="margin-top:8px; font-size:12px;">Esta página es una demostración de casos de uso. Contenido elaborado con fines ilustrativos.</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    // Update active tab
+    document.querySelectorAll('.ind-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.module-card, .case-strip, .industry-header').forEach(el => {
+    el.classList.add('animate');
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+
+  // Active tab on scroll
+  const sections = ['hoteles','gobierno','retail','barraca','construccion','logistica'];
+  const tabs = document.querySelectorAll('.ind-tab');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 200) current = id;
+    });
+    tabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === sections.indexOf(current));
+    });
+  });
+</script>
+</body>
+</html>
